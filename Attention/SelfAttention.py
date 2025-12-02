@@ -84,3 +84,18 @@ class SelfAttention(nn.Module):
         attn_output = self.out_proj(attn_output)
 
         return attn_output, attn_weights
+
+if __name__ == "__main__":
+    batch_size = 2
+    seq_len = 8
+    hidden_size = 32
+    num_heads = 4
+
+    self_attn = SelfAttention(hidden_size, num_heads, dropout_prob=0.1)
+
+    x = torch.randn(batch_size, seq_len, hidden_size)
+    attn_output, attn_weights = self_attn(x)
+
+    print("Self-Attention Output Shape:", attn_output.shape)  # [2, 8, 32]
+    print("Self-Attention Weights Shape:", attn_weights.shape)  # [2, 4, 8, 8]
+    
