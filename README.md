@@ -6,15 +6,15 @@
 - [x] Self-Attention
 - [x] Multi-Head Attention
 - [x] Cross-Attention
-- [ ] Causal Attention (Masked Self-Attention)
+- [x] Causal Attention (Masked Self-Attention)
+- [x] Multi-Query Attention (MQA)
+- [ ] Grouped Query Attention (GQA)
+- [ ] Flash Attention
+- [ ] Rotary Position Embedding (RoPE)
 - [ ] Sparse Attention
 - [ ] Linear Attention
-- [ ] Flash Attention
-- [ ] Grouped Query Attention (GQA)
-- [ ] Multi-Query Attention (MQA)
 - [ ] Sliding Window Attention
 - [ ] Relative Position Attention
-- [ ] Rotary Position Embedding (RoPE)
 - [ ] ALiBi (Attention with Linear Biases)
 
 ## 常见 RL 方法
@@ -25,8 +25,8 @@
 - [ ] PPO (Proximal Policy Optimization)
 - [ ] DPO (Direct Preference Optimization)
 - [ ] GRPO 
-- [ ] SPO
-- [ ] DAPO
+- [ ] SPO 
+- [ ] DAPO 
 
 ## 常见 Utils
 

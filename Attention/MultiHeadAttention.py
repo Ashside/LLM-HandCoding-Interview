@@ -27,7 +27,7 @@ class MultiHeadAttention(nn.Module):
         attn_weights: [batch, num_heads, seq_len_q, seq_len_k]
     """
 
-    def __init__(self, hidden_size: int, num_heads: int, dropout_prob: float = 0.0, bias: bool = True) -> None:
+    def __init__(self, hidden_size: int, num_heads: int, dropout_prob: float = 0.0, bias: bool = False) -> None:
         super().__init__()
         self.hidden_size = hidden_size
         self.num_heads = num_heads
