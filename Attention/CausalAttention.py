@@ -69,7 +69,7 @@ class CausalAttention(nn.Module):
         # [b, h, L, d_head]
         attn_output = einsum("bhqk,bhkd->bhqd", attn_probs, v)
         # merge heads: [b, L, d_model]
-        attn_output = attn_output.transpose(1, 2).reshape(batch_size, seq_len, self.hidden_size)
+        attn_output = attn_output.transpose(1, 2).reshape(batch_size, seq_len, -1)
         attn_output = self.out_proj(attn_output)
 
         return attn_output, attn_probs
