@@ -8,7 +8,8 @@
 - [x] Cross-Attention
 - [x] Causal Attention (Masked Self-Attention)
 - [x] Multi-Query Attention (MQA)
-- [ ] Grouped Query Attention (GQA)
+- [x] Grouped Query Attention (GQA)
+- [ ] Multi-Head Latent Attention (MLA)
 - [ ] Flash Attention
 - [ ] Rotary Position Embedding (RoPE)
 - [ ] Sparse Attention
