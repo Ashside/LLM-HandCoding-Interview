@@ -31,10 +31,10 @@
 
 ## 常见 Utils
 
-- [ ] Softmax
-- [ ] LayerNorm
-- [ ] RMSNorm
-- [ ] SwiGLU
+- [x] Softmax
+- [x] LayerNorm
+- [x] RMSNorm
+- [x] SwiGLU
 - [ ] AdamW
 - [ ] Learning Rate Scheduler
 - [ ] Gradient Clipping
