@@ -126,3 +126,26 @@ class GroupedQueryAttention(nn.Module):
         attn_output = self.out_proj(attn_output)
 
         return attn_output, attn_weights
+
+if __name__ == "__main__":
+    # Example usage
+    batch_size = 2
+    seq_len = 4
+    hidden_size = 16
+    num_attention_heads = 4
+    num_kv_heads = 2
+
+    gqa = GroupedQueryAttention(
+        hidden_size=hidden_size,
+        num_attention_heads=num_attention_heads,
+        num_kv_heads=num_kv_heads,
+        dropout_prob=0.1,
+        bias=True,
+    )
+
+    x = torch.randn(batch_size, seq_len, hidden_size)
+    attn_output, attn_weights = gqa(x)
+
+    print("Attention output shape:", attn_output.shape)  # Expected: [2, 4, 16]
+    print("Attention weights shape:", attn_weights.shape)  # Expected: [2, 4, 4, 4]
+    
