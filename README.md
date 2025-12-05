@@ -35,9 +35,9 @@
 - [x] LayerNorm
 - [x] RMSNorm
 - [x] SwiGLU
-- [ ] AdamW
-- [ ] Learning Rate Scheduler
-- [ ] Gradient Clipping
+- [x] AdamW
+- [x] Learning Rate Scheduler
+- [x] Gradient Clipping
 - [ ] Mixed Precision Training
 - [ ] Distributed Data Parallel (DDP)
 
