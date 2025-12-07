@@ -10,18 +10,15 @@
 - [x] Multi-Query Attention (MQA)
 - [x] Grouped Query Attention (GQA)
 - [ ] Multi-Head Latent Attention (MLA)
-- [ ] Flash Attention
 - [ ] Rotary Position Embedding (RoPE)
-- [ ] Sparse Attention
-- [ ] Linear Attention
-- [ ] Sliding Window Attention
-- [ ] Relative Position Attention
-- [ ] ALiBi (Attention with Linear Biases)
+- [ ] Sinusoidal Position Embedding
+- [ ] KV Caching
+- [ ] Flash Attention
 
 ## 常见 RL 方法
 
 - [ ] SFT (Supervised Fine-Tuning)
-- [ ] LoRA (Low-Rank Adaptation)
+- [x] LoRA (Low-Rank Adaptation)
 - [ ] Distillation
 - [ ] PPO (Proximal Policy Optimization)
 - [ ] DPO (Direct Preference Optimization)
