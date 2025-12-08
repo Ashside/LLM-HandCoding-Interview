@@ -9,6 +9,7 @@
 - [x] Causal Attention (Masked Self-Attention)
 - [x] Multi-Query Attention (MQA)
 - [x] Grouped Query Attention (GQA)
+- [x] Gated Attention
 - [ ] Multi-Head Latent Attention (MLA)
 - [ ] Rotary Position Embedding (RoPE)
 - [ ] Sinusoidal Position Embedding

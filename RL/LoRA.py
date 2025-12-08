@@ -1,3 +1,4 @@
+import os
 import torch
 from torch import nn
 from typing import Optional, Dict
@@ -55,34 +56,40 @@ def apply_lora(
     This will *add* LoRA(x) to the original Linear forward, and freeze
     the original Linear weights by default.
     """
+    # 1. 先收集所有目标模块，避免在遍历过程中修改模型结构导致无限递归
+    # (因为 LoRA 层内部也有 Linear，动态遍历会不断发现新加的 Linear)
+    target_modules = []
     for name, module in model.named_modules():
         if isinstance(module, nn.Linear):
-            if hasattr(module, "lora"):
-                # 已经打过 LoRA 了，跳过
-                continue
+            target_modules.append((name, module))
 
-            lora = LoRALayer(
-                in_features=module.in_features,
-                out_features=module.out_features,
-                rank=rank,
-                alpha=alpha,
-                bias=bias,
-            )
-            # 将 LoRA 模块挂在 Linear 上
-            module.lora = lora
+    for name, module in target_modules:
+        if hasattr(module, "lora"):
+            # 已经打过 LoRA 了，跳过
+            continue
 
-            # 冻结原始权重，只训练 LoRA（符合大模型微调习惯）
-            module.weight.requires_grad_(False)
-            if module.bias is not None:
-                module.bias.requires_grad_(False)
+        lora = LoRALayer(
+            in_features=module.in_features,
+            out_features=module.out_features,
+            rank=rank,
+            alpha=alpha,
+            bias=bias,
+        )
+        # 将 LoRA 模块挂在 Linear 上
+        module.lora = lora
 
-            # 保存原始 forward
-            module._orig_forward = module.forward
+        # 冻结原始权重，只训练 LoRA（符合大模型微调习惯）
+        module.weight.requires_grad_(False)
+        if module.bias is not None:
+            module.bias.requires_grad_(False)
 
-            def forward_lora(x, base_layer=module._orig_forward, lora_layer=module.lora):
-                return base_layer(x) + lora_layer(x)
+        # 保存原始 forward
+        module._orig_forward = module.forward
 
-            module.forward = forward_lora
+        def forward_lora(x, base_layer=module._orig_forward, lora_layer=module.lora):
+            return base_layer(x) + lora_layer(x)
+
+        module.forward = forward_lora
 def remove_lora(model: nn.Module) -> None:
     """
     Remove LoRA hooks and restore original Linear.forward.
@@ -140,3 +147,27 @@ def load_lora_state_dict(model: nn.Module, path: str, device: Optional[torch.dev
                 if k.startswith(prefix)
             }
             module.lora.load_state_dict(lora_state, strict=True)
+
+if __name__ == "__main__":
+    # 简单测试 LoRA 模块
+    linear = nn.Linear(16, 32)
+    apply_lora(linear, rank=4, alpha=8)
+
+    x = torch.randn(2, 16)
+    y = linear(x)
+    print("Output shape with LoRA:", y.shape)
+
+    # 保存 LoRA 状态
+    save_lora_state_dict(linear, "lora_test.pth")
+
+    # 移除 LoRA
+    remove_lora(linear)
+    y_no_lora = linear(x)
+    print("Output shape without LoRA:", y_no_lora.shape)
+
+    # 重新应用 LoRA 并加载状态
+    apply_lora(linear, rank=4, alpha=8)
+    load_lora_state_dict(linear, "lora_test.pth")
+    y_loaded = linear(x)
+    print("Output shape after loading LoRA:", y_loaded.shape)
+    os.remove("lora_test.pth")
