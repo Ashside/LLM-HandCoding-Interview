@@ -13,7 +13,7 @@
 - [ ] Multi-Head Latent Attention (MLA)
 - [x] Rotary Position Embedding (RoPE)
 - [x] Sinusoidal Position Embedding
-- [ ] KV Caching
+- [x] KV Cache
 - [ ] Flash Attention
 
 ## 常见 RL 方法
