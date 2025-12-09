@@ -11,8 +11,8 @@
 - [x] Grouped Query Attention (GQA)
 - [x] Gated Attention
 - [ ] Multi-Head Latent Attention (MLA)
-- [ ] Rotary Position Embedding (RoPE)
-- [ ] Sinusoidal Position Embedding
+- [x] Rotary Position Embedding (RoPE)
+- [x] Sinusoidal Position Embedding
 - [ ] KV Caching
 - [ ] Flash Attention
 
