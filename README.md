@@ -18,12 +18,11 @@
 
 ## 常见 RL 方法
 
-- [ ] SFT (Supervised Fine-Tuning)
 - [x] LoRA (Low-Rank Adaptation)
 - [ ] Distillation
-- [ ] PPO (Proximal Policy Optimization)
-- [ ] DPO (Direct Preference Optimization)
-- [ ] GRPO 
+- [x] PPO (Proximal Policy Optimization)
+- [x] DPO (Direct Preference Optimization)
+- [x] GRPO 
 - [ ] SPO 
 - [ ] DAPO 
 
